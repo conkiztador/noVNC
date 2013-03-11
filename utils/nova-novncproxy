@@ -31,8 +31,16 @@ import wsproxy
 from nova import config
 from nova import context
 from nova import utils
-from nova.openstack.common import cfg
 from nova.openstack.common import rpc
+
+try:
+    from oslo.config import cfg
+except ImportError:
+    try:
+       from nova.openstack.common import cfg
+    except ImportError:
+        raise ImportError("Cannot import name cfg. Check that "
+                          "the python oslo.config module is installed.")
 
 
 opts = [
